@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Restaurantes - RanGo</title>
+</head>
+
+<body>
+
+    <h1>Restaurantes de Maceió - AL</h1>
+    
+    <p>
+    <a th:href="@{/restaurantes/novo}">
+        + Cadastrar restaurante
+    </a>
+    </p>    
+
+    <p>Lista de restaurantes cadastrados no RanGo.</p>
+
+    <table border="1" cellpadding="8">
+
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Bairro</th>
+                <th>Categoria</th>
+                <th>Endereço</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="r : ${restaurantes}">
+                <td th:text="${r.nome}"></td>
+                <td th:text="${r.bairro}"></td>
+                <td th:text="${r.categoria}"></td>
+                <td th:text="${r.endereco}"></td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(restaurantes)}">
+                <td colspan="4">
+                    Nenhum restaurante cadastrado ainda.
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</body>
+</html>
