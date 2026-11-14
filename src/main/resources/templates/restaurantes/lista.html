@@ -1,84 +1,178 @@
 
 <!DOCTYPE html>
-<html lang="pt-BR"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <title>Restaurantes - RanGo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontre restaurantes | RanGo</title>
+
+    <link rel="stylesheet" href="/css/rango.css" th:href="@{/css/rango.css}">
+    <script src="/js/filtros.js" th:src="@{/js/filtros.js}" defer></script>
 </head>
-
 <body>
+    
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="/restaurantes" th:href="@{/restaurantes}" aria-label="RanGo - início">
+                <img src="/img/logo%20RanGo.png" th:src="@{/img/logo%20RanGo.png}" alt="Logo do RanGo">
+                <span>Ran<strong>Go</strong></span>
+            </a>
 
-    <h1>Restaurantes de Maceió - AL</h1>
+            <nav class="main-nav" aria-label="Menu principal">
+                <a href="#categorias">Tipos de comida</a>
+                <a href="#resultados">Restaurantes</a>
+                <a href="/restaurantes/novo" th:href="@{/restaurantes/novo}" class="register-link">
+                    Cadastrar restaurante
+                </a>
+            </nav>
+        </div>
+    </header>
 
-    <p>
-        <a th:href="@{/restaurantes/novo}">
-            + Cadastrar restaurante
-        </a>
-    </p>
+    <main>
+       
+        <section class="hero">
+            <div class="container">
+                <p class="hero-label">DESCUBRA MACEIÓ</p>
+                <h1>Encontre o restaurante ideal <span>para você.</span></h1>
+                <p>Não sabe onde comer? Escolha o tipo de comida, o bairro e a faixa de preço para encontrar opções.</p>
+            </div>
+        </section>
 
-    <h2>Buscar restaurantes</h2>
+        
+        <section class="container filter-section" aria-labelledby="filters-title">
+            <div class="filter-box">
+                <h2 id="filters-title">O que você está procurando?</h2>
 
-    <form th:action="@{/restaurantes}" method="get">
+                <form id="restaurant-filters" action="/restaurantes" th:action="@{/restaurantes}" method="get">
+                    <div class="filter-grid">
+                        <div class="field">
+                            <label for="categoria">Tipo de comida</label>
+                            <select id="categoria" name="categoria">
+                                <option value="">Todas as culinárias</option>
+                                <option value="massas">Massas</option>
+                                <option value="hamburguer">Hambúrguer</option>
+                                <option value="japones">Japonês</option>
+                                <option value="vegano">Vegano</option>
+                                <option value="regional">Regional</option>
+                                <option value="pizza">Pizza</option>
+                            </select>
+                        </div>
 
-        <label for="nome">Nome:</label>
+                        <div class="field">
+                            <label for="bairro">Bairro ou região</label>
+                            <input id="bairro" name="bairro" type="search"
+                                   placeholder="Ex.: Ponta Verde" th:value="${bairro}">
+                        </div>
 
-        <input type="text"
-               id="nome"
-               name="nome"
-               placeholder="Nome do restaurante"
-               th:value="${nome}">
+                        <div class="field">
+                            <label for="preco">Faixa de preço</label>
+                            <select id="preco" name="preco" aria-describedby="price-help">
+                                <option value="">Qualquer preço</option>
+                                <option value="ate40">Até R$ 40</option>
+                                <option value="40a70">R$ 40 a R$ 70</option>
+                                <option value="70a100">R$ 70 a R$ 100</option>
+                                <option value="acima100">Acima de R$ 100</option>
+                            </select>
+                        </div>
 
-        <label for="bairro">Bairro:</label>
+                        <div class="field">
+                            <label for="nome">Nome do restaurante <small>(opcional)</small></label>
+                            <input id="nome" name="nome" type="search"
+                                   placeholder="Se já souber o nome" th:value="${nome}">
+                        </div>
+                    </div>
 
-        <input type="text"
-               id="bairro"
-               name="bairro"
-               placeholder="Ex: Ponta Verde"
-               th:value="${bairro}">
+                    <div class="filter-actions">
+                        <button class="btn btn-primary" type="submit">Buscar restaurantes</button>
+                        <a class="btn btn-secondary" href="/restaurantes" th:href="@{/restaurantes}">Limpar filtros</a>
+                    </div>
 
-        <button type="submit">Buscar</button>
+                    <p class="prototype-note" id="price-help">
+                        Protótipo: o filtro por preço será ativado quando a equipe incluir faixas de preço nos cadastros.
+                    </p>
+                </form>
+            </div>
+        </section>
 
-        <a th:href="@{/restaurantes}">
-            Limpar filtros
-        </a>
+        <!-- Atalhos para descobrir culinárias -->
+        <section class="container categories-section" id="categorias">
+            <div class="section-heading">
+                <h2>Explore por tipo de comida</h2>
+                <p>Comece pela culinária que você está com vontade de experimentar.</p>
+            </div>
 
-    </form>
+            <div class="category-list">
+                <button type="button" class="category-choice" data-category="massas">
+                    <span aria-hidden="true">🍝</span> Massas
+                </button>
+                <button type="button" class="category-choice" data-category="hamburguer">
+                    <span aria-hidden="true">🍔</span> Hambúrguer
+                </button>
+                <button type="button" class="category-choice" data-category="japones">
+                    <span aria-hidden="true">🍣</span> Sushi
+                </button>
+                <button type="button" class="category-choice" data-category="vegano">
+                    <span aria-hidden="true">🥗</span> Vegetariana
+                </button>
+                <button type="button" class="category-choice" data-category="regional">
+                    <span aria-hidden="true">🍲</span> Brasileira
+                </button>
+                <button type="button" class="category-choice" data-category="pizza">
+                    <span aria-hidden="true">🍕</span> Pizza
+                </button>
+                <button type="button" class="category-choice" data-category="doces">
+                    <span aria-hidden="true">🍰</span> Sobremesas 
+                </button>
+                
+            </div>
+        </section>
 
-    <h2>Restaurantes encontrados</h2>
+        
+        <section class="container results-section" id="resultados" aria-labelledby="results-title">
+            <div class="section-heading results-heading">
+                <div>
+                    <h2 id="results-title">Restaurantes encontrados</h2>
+                    <p>Opções cadastradas em Maceió.</p>
+                </div>
+                <span class="results-count" id="results-count" aria-live="polite">Resultados</span>
+            </div>
 
-    <table border="1" cellpadding="8">
+            <div class="restaurant-list" id="restaurant-list">
+                <article class="restaurant-card"
+                         th:each="r : ${restaurantes}"
+                         th:attr="data-categoria=${r.categoria}">
+                    <div class="restaurant-icon" aria-hidden="true">🍽️</div>
 
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Bairro</th>
-                <th>Categoria</th>
-                <th>Endereço</th>
-            </tr>
-        </thead>
+                    <div class="restaurant-info">
+                        <span class="category-tag" th:text="${r.categoria}">Categoria</span>
+                        <h3 th:text="${r.nome}">Nome do restaurante</h3>
+                        <p class="restaurant-description"
+                           th:if="${r.descricao != null and !#strings.isEmpty(r.descricao)}"
+                           th:text="${r.descricao}">Descrição do restaurante</p>
+                        <p class="restaurant-address">
+                            <span aria-hidden="true">📍</span>
+                            <span th:text="${r.bairro}">Bairro</span>
+                            <span class="address-separator">·</span>
+                            <span th:text="${r.endereco}">Endereço</span>
+                        </p>
+                    </div>
+                </article>
+            </div>
 
-        <tbody>
+            <div class="empty-state" id="empty-results" hidden>
+                <h3>Nenhum restaurante encontrado</h3>
+                <p>Tente mudar o tipo de comida, o bairro ou o nome pesquisado.</p>
+                <a href="/restaurantes" th:href="@{/restaurantes}" class="btn btn-secondary">Ver todos</a>
+            </div>
 
-            <tr th:each="r : ${restaurantes}">
-                <td th:text="${r.nome}"></td>
-                <td th:text="${r.bairro}"></td>
-                <td th:text="${r.categoria}"></td>
-                <td th:text="${r.endereco}"></td>
-            </tr>
+            <p class="price-warning" id="price-warning" hidden>
+                A faixa de preço selecionada ainda não foi aplicada: esse dado será incluído na próxima etapa do projeto.
+            </p>
+        </section>
+    </main>
 
-            <tr th:if="${#lists.isEmpty(restaurantes)}">
-                <td colspan="4">
-                    Nenhum restaurante encontrado.
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
-
+    <footer class="site-footer">
+        <div class="container">RanGo · Projeto acadêmico de busca de restaurantes em Maceió</div>
+    </footer>
 </body>
 </html>
