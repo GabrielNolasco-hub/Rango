@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RestauranteController {
@@ -21,25 +22,35 @@ public class RestauranteController {
 
 
     @GetMapping("/restaurantes")
-    public String listarRestaurantes(Model model) {
+    public String listarRestaurantes(
+            @RequestParam (defaultValue = "") String nome,
+            @RequestParam (defaultValue = "") String bairro,
+            Model model) {
+        
+                nome = nome.trim();
+                bairro = bairro.trim();
 
-        model.addAttribute(
-                "restaurantes",
-                repository.findAll()
-        );
+                model.addAttribute(
+                        "restaurantes",
+                        repository.findByNomeContainingIgnoreCaseAndBairroContainingIgnoreCase(
+                                nome, bairro
+                        )
+                );
 
-        return "restaurantes/lista";
-    }
+                model.addAttribute("nome", nome);
+                model.addAttribute("bairro", bairro);
+
+                return "restaurantes/lista";
+            }
+    
 
 
     @GetMapping("/restaurantes/novo")
     public String novoRestaurante(Model model) {
-
         model.addAttribute(
-                "restaurante",
-                new Restaurante()
+            "restaurante",
+            new Restaurante()
         );
-
         return "restaurantes/form";
     }
 

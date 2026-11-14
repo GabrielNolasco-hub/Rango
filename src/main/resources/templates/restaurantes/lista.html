@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org">
@@ -12,14 +13,42 @@
 <body>
 
     <h1>Restaurantes de Maceió - AL</h1>
-    
-    <p>
-    <a th:href="@{/restaurantes/novo}">
-        + Cadastrar restaurante
-    </a>
-    </p>    
 
-    <p>Lista de restaurantes cadastrados no RanGo.</p>
+    <p>
+        <a th:href="@{/restaurantes/novo}">
+            + Cadastrar restaurante
+        </a>
+    </p>
+
+    <h2>Buscar restaurantes</h2>
+
+    <form th:action="@{/restaurantes}" method="get">
+
+        <label for="nome">Nome:</label>
+
+        <input type="text"
+               id="nome"
+               name="nome"
+               placeholder="Nome do restaurante"
+               th:value="${nome}">
+
+        <label for="bairro">Bairro:</label>
+
+        <input type="text"
+               id="bairro"
+               name="bairro"
+               placeholder="Ex: Ponta Verde"
+               th:value="${bairro}">
+
+        <button type="submit">Buscar</button>
+
+        <a th:href="@{/restaurantes}">
+            Limpar filtros
+        </a>
+
+    </form>
+
+    <h2>Restaurantes encontrados</h2>
 
     <table border="1" cellpadding="8">
 
@@ -33,6 +62,7 @@
         </thead>
 
         <tbody>
+
             <tr th:each="r : ${restaurantes}">
                 <td th:text="${r.nome}"></td>
                 <td th:text="${r.bairro}"></td>
@@ -42,9 +72,10 @@
 
             <tr th:if="${#lists.isEmpty(restaurantes)}">
                 <td colspan="4">
-                    Nenhum restaurante cadastrado ainda.
+                    Nenhum restaurante encontrado.
                 </td>
             </tr>
+
         </tbody>
 
     </table>
