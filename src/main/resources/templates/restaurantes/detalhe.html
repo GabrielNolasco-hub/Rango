@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${restaurante.nome} - RanGo|">Detalhes do restaurante - RanGo</title>
+
+    <link rel="stylesheet"
+          href="/css/rango.css"
+          th:href="@{/css/rango.css}">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container header-content">
+
+        <a class="brand"
+           href="/restaurantes"
+           th:href="@{/restaurantes}">
+            <img src="/img/logo%20RanGo.png"
+                 th:src="@{/img/logo%20RanGo.png}"
+                 alt="Logo do RanGo">
+            <span>Ran<strong>Go</strong></span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="/restaurantes" th:href="@{/restaurantes}">
+                Restaurantes
+            </a>
+        </nav>
+
+    </div>
+</header>
+
+<main class="container rd-page">
+
+    <a class="rd-back"
+       href="/restaurantes"
+       th:href="@{/restaurantes}">
+        ← Voltar aos restaurantes
+    </a>
+
+    <section class="rd-overview">
+
+        <div class="rd-topline">
+            <span class="rd-kicker">PERFIL DO RESTAURANTE</span>
+
+            <span class="rd-category"
+                  th:text="${restaurante.categoria}">
+                Categoria
+            </span>
+        </div>
+
+        <h1 th:text="${restaurante.nome}">
+            Nome do restaurante
+        </h1>
+
+        <p class="rd-description"
+           th:if="${restaurante.descricao != null and !#strings.isEmpty(restaurante.descricao)}"
+           th:text="${restaurante.descricao}">
+            Descrição do restaurante
+        </p>
+
+        <div class="rd-status">
+            <span aria-hidden="true">◉</span>
+            <span th:text="${status}">
+                Horário não informado
+            </span>
+        </div>
+
+    </section>
+
+    <div class="rd-info-grid">
+
+        <section class="rd-panel">
+            <h2>Localização</h2>
+
+            <div class="rd-info-item">
+                <span class="rd-info-label">Bairro</span>
+                <strong th:text="${restaurante.bairro}">Bairro</strong>
+            </div>
+
+            <div class="rd-info-item">
+                <span class="rd-info-label">Endereço</span>
+                <strong th:text="${restaurante.endereco}">Endereço</strong>
+            </div>
+        </section>
+
+        <section class="rd-panel">
+            <h2>Horário de funcionamento</h2>
+
+            <div class="rd-info-item">
+                <span class="rd-info-label">Abertura</span>
+                <strong th:text="${horarioAberturaFormatado}">11:00</strong>
+            </div>
+
+            <div class="rd-info-item">
+                <span class="rd-info-label">Fechamento</span>
+                <strong th:text="${horarioFechamentoFormatado}">15:00</strong>
+            </div>
+        </section>
+
+        <section class="rd-panel">
+            <h2>Contato</h2>
+
+            <div class="rd-info-item">
+                <span class="rd-info-label">Contato do restaurante</span>
+
+                <strong th:if="${restaurante.contato != null and !#strings.isEmpty(restaurante.contato)}"
+                        th:text="${restaurante.contato}">
+                    (82) 99999-9999
+                </strong>
+
+                <strong th:unless="${restaurante.contato != null and !#strings.isEmpty(restaurante.contato)}">
+                    Não informado
+                </strong>
+            </div>
+        </section>
+
+    </div>
+
+    <section class="rd-dishes">
+
+        <div class="rd-section-heading">
+            <div>
+                <h2>Pratos do restaurante</h2>
+                <p>Confira as opções cadastradas neste estabelecimento.</p>
+            </div>
+
+            <span class="rd-dish-count"
+                  th:text="|${#lists.size(pratos)} prato(s)|">
+                0 prato(s)
+            </span>
+        </div>
+
+        <div class="rd-dish-list" th:if="${!#lists.isEmpty(pratos)}">
+
+            <article class="rd-dish-card" th:each="p : ${pratos}">
+                <div class="rd-dish-icon" aria-hidden="true">🍽️</div>
+
+                <div class="rd-dish-info">
+                    <h3 th:text="${p.nome}">Nome do prato</h3>
+                    <p th:text="${p.descricao}">Descrição do prato</p>
+                </div>
+
+                <strong class="rd-dish-price"
+                        th:text="|R$ ${#numbers.formatDecimal(p.preco, 1, 2, 'COMMA')}|">
+                    R$ 0,00
+                </strong>
+            </article>
+
+        </div>
+
+        <div class="rd-empty" th:if="${#lists.isEmpty(pratos)}">
+            <p>Este restaurante ainda não possui pratos cadastrados.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        RanGo · Projeto acadêmico de busca de restaurantes em Maceió
+    </div>
+</footer>
+
+</body>
+</html>
