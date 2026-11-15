@@ -1,5 +1,7 @@
 package com.rango.rango.model;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,8 @@ public class Restaurante {
     private String bairro;
     private String categoria;
     private String descricao;
+    private LocalTime horarioAbertura;
+    private LocalTime horarioFechamento;
 
     public Restaurante() {
     }
@@ -69,5 +73,32 @@ public class Restaurante {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public LocalTime getHorarioAbertura() {
+        return horarioAbertura;
+    }
+
+    public void setHorarioAbertura(LocalTime horarioAbertura) {
+        this.horarioAbertura = horarioAbertura;
+    }
+
+    public LocalTime getHorarioFechamento() {
+        return horarioFechamento;
+    }
+
+    public void setHorarioFechamento(LocalTime horarioFechamento) {
+        this.horarioFechamento = horarioFechamento;
+    }
+
+    public boolean estaAberto(LocalTime agora) {
+        if (horarioAbertura == null || horarioFechamento == null) {
+            return false;
+        }
+        if (horarioAbertura.isBefore(horarioFechamento)) {
+            return !agora.isBefore(horarioAbertura) && agora.isBefore(horarioFechamento);
+        }
+        // fecha depois da meia-noite (ex.: abre 18:00 e fecha 02:00)
+        return !agora.isBefore(horarioAbertura) || agora.isBefore(horarioFechamento);
     }
 }
