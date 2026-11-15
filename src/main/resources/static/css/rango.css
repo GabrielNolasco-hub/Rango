@@ -952,3 +952,147 @@ a:focus-visible {
     outline: 2px solid var(--laranja);
     outline-offset: 1px;
 }
+
+
+/* Cadastro de pratos na página de detalhes */
+
+.rd-add-dish {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.rd-add-dish summary {
+    display: flex;
+    align-items: center;
+    padding: 18px 22px;
+    color: var(--laranja);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+}
+
+.rd-add-dish summary::-webkit-details-marker {
+    display: none;
+}
+
+.rd-add-dish summary:hover {
+    background: #fff8f0;
+}
+
+.rd-add-dish[open] summary {
+    border-bottom: 1px solid var(--borda);
+}
+
+.rd-add-dish-content {
+    padding: 24px;
+}
+
+.rd-add-dish-content h3 {
+    color: var(--marinho);
+    font-size: 19px;
+    margin: 0 0 6px;
+}
+
+.rd-add-dish-content > p {
+    color: var(--cinza);
+    font-size: 13px;
+    margin: 0 0 22px;
+}
+
+
+.rd-dish-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.rd-field-full {
+    grid-column: 1 / -1;
+}
+
+.rd-dish-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rd-dish-field label {
+    font-size: 13px;
+    color: var(--marinho);
+    font-weight: bold;
+}
+
+.rd-dish-field input,
+.rd-dish-field textarea {
+    width: 100%;
+    padding: 12px 13px;
+    color: var(--marinho);
+    background: var(--branco);
+    border: 1px solid #cfd7e0;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.rd-dish-field textarea {
+    resize: vertical;
+}
+
+.rd-dish-field input:focus,
+.rd-dish-field textarea:focus {
+    outline: 2px solid var(--laranja);
+    outline-offset: 1px;
+}
+
+
+.rd-dish-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+}
+
+.rd-dish-form-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.rd-dish-feedback {
+    font-size: 13px;
+    margin: 12px 0 0;
+}
+
+.rd-dish-feedback:empty {
+    display: none;
+}
+
+.rd-dish-feedback.success {
+    color: #237a44;
+}
+
+.rd-dish-feedback.error {
+    color: #b42318;
+}
+
+
+@media (max-width: 600px) {
+
+    .rd-add-dish-content {
+        padding: 18px;
+    }
+
+    .rd-dish-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rd-field-full {
+        grid-column: auto;
+    }
+
+    .rd-dish-form-actions .btn {
+        width: 100%;
+    }
+
+}
