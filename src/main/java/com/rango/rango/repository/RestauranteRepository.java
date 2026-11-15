@@ -1,16 +1,16 @@
 package com.rango.rango.repository;
 
-import com.rango.rango.model.Restaurante;
-import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-public interface RestauranteRepository
-        extends JpaRepository<Restaurante, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-      
-        List<Restaurante> 
-        findByNomeContainingIgnoreCaseAndBairroContainingIgnoreCase(
-                String nome, String bairro
-        );
+import com.rango.rango.model.Restaurante;
 
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+
+    List<Restaurante> findByNomeContainingIgnoreCaseAndBairroContainingIgnoreCase(
+            String nome, String bairro);
+
+    List<Restaurante> findByNomeContainingIgnoreCaseAndBairroContainingIgnoreCaseAndCategoriaContainingIgnoreCase(
+            String nome, String bairro, String categoria);
 }
