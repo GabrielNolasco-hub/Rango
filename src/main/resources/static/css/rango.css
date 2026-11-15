@@ -1,0 +1,628 @@
+:root {
+    --marinho: #1b2d43;
+    --laranja: #ff8500;
+    --laranja-claro: #fff2e4;
+    --branco: #ffffff;
+    --fundo: #f7f8fa;
+    --cinza: #667382;
+    --borda: #e1e5ea;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--marinho);
+    background: var(--fundo);
+    line-height: 1.5;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+.container {
+    width: min(1060px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+.site-header {
+    background: var(--branco);
+    border-bottom: 1px solid var(--borda);
+}
+
+.header-content {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--marinho);
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 39px;
+    height: 39px;
+    object-fit: contain;
+}
+
+.brand strong {
+    color: var(--laranja);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: var(--marinho);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.main-nav a:hover {
+    color: var(--laranja);
+}
+
+.main-nav .register-link {
+    color: var(--branco);
+    background: var(--laranja);
+    padding: 10px 14px;
+    border-radius: 7px;
+}
+
+
+.hero {
+    background: var(--marinho);
+    color: var(--branco);
+    padding: 54px 0 66px;
+}
+
+.hero-label {
+    color: #ffc48a;
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 4vw, 45px);
+    line-height: 1.2;
+    max-width: 630px;
+    margin: 0 0 15px;
+}
+
+.hero h1 span {
+    color: #ffac50;
+}
+
+.hero p:last-child {
+    max-width: 620px;
+    margin: 0;
+    color: #e1e8ef;
+    font-size: 15px;
+}
+
+
+.filter-section {
+    margin-top: -27px;
+    position: relative;
+}
+
+.filter-box {
+    padding: 26px;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.filter-box h2 {
+    margin: 0 0 18px;
+    font-size: 19px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.field {
+    min-width: 0;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.field label small {
+    font-size: 11px;
+    font-weight: normal;
+    color: var(--cinza);
+}
+
+.field input,
+.field select {
+    width: 100%;
+    height: 43px;
+    background: var(--branco);
+    color: var(--marinho);
+    padding: 0 11px;
+    border: 1px solid #cfd7e0;
+    border-radius: 6px;
+}
+
+.field input::placeholder {
+    color: #8c98a5;
+}
+
+.field input:focus,
+.field select:focus,
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--laranja);
+    outline-offset: 2px;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 17px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 19px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: var(--branco);
+    background: var(--laranja);
+}
+
+.btn-primary:hover {
+    background: #e97800;
+}
+
+.btn-secondary {
+    color: var(--marinho);
+    background: var(--branco);
+    border-color: var(--borda);
+}
+
+.btn-secondary:hover {
+    background: #f4f6f8;
+}
+
+.prototype-note {
+    font-size: 11px;
+    margin: 12px 0 0;
+    color: var(--cinza);
+}
+
+
+.categories-section,
+.results-section {
+    padding-top: 40px;
+}
+
+.section-heading h2 {
+    font-size: 23px;
+    margin: 0 0 3px;
+}
+
+.section-heading p {
+    font-size: 13px;
+    color: var(--cinza);
+    margin: 0;
+}
+
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.category-choice {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 9px;
+    color: var(--marinho);
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.category-choice span {
+    font-size: 24px;
+}
+
+.category-choice:hover,
+.category-choice.active {
+    border-color: var(--laranja);
+    background: var(--laranja-claro);
+}
+
+
+.results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.results-count {
+    color: var(--cinza);
+    font-size: 12px;
+}
+
+.restaurant-list {
+    display: grid;
+    gap: 12px;
+}
+
+.restaurant-card {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    padding: 17px;
+}
+
+.restaurant-card[hidden],
+.empty-state[hidden],
+.price-warning[hidden] {
+    display: none;
+}
+
+.restaurant-icon {
+    display: grid;
+    place-items: center;
+    width: 90px;
+    height: 90px;
+    flex: 0 0 90px;
+    font-size: 36px;
+    background: var(--laranja-claro);
+    border-radius: 7px;
+}
+
+.restaurant-info {
+    min-width: 0;
+}
+
+.category-tag {
+    color: #d16a00;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.restaurant-info h3 {
+    font-size: 19px;
+    margin: 3px 0;
+}
+
+.restaurant-description,
+.restaurant-address {
+    color: var(--cinza);
+    font-size: 12px;
+    margin: 5px 0 0;
+}
+
+.address-separator {
+    padding: 0 4px;
+}
+
+.empty-state {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.empty-state h3 {
+    margin: 0 0 6px;
+}
+
+.empty-state p {
+    font-size: 13px;
+    color: var(--cinza);
+}
+
+.price-warning {
+    padding: 12px 15px;
+    background: #fff5e7;
+    border-left: 3px solid var(--laranja);
+    font-size: 12px;
+}
+
+.site-footer {
+    padding: 26px 0;
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid var(--borda);
+    color: var(--cinza);
+    font-size: 12px;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 850px) {
+    .filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .category-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 570px) {
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .header-content {
+        flex-direction: column;
+        padding: 12px 0;
+        gap: 14px;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .hero {
+        padding: 35px 0 60px;
+    }
+
+    .filter-box {
+        padding: 18px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+        flex-wrap: wrap;
+    }
+
+    .category-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .restaurant-card {
+        align-items: flex-start;
+    }
+
+    .restaurant-icon {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+        font-size: 26px;
+    }
+}
+
+
+
+/* PÁGINA DE CADASTRO DE RESTAURANTES
+        Conteúdo principal */
+
+.cadastro-main {
+    padding-top: 35px;
+    padding-bottom: 60px;
+}
+
+.cadastro-topo {
+    margin-bottom: 28px;
+}
+
+.cadastro-voltar {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: var(--cinza);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.cadastro-voltar:hover {
+    color: var(--laranja);
+}
+
+.cadastro-label {
+    color: var(--laranja);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+}
+
+.cadastro-topo h1 {
+    font-size: 32px;
+    margin: 0 0 10px;
+    color: var(--marinho);
+}
+
+.cadastro-topo > p:last-child {
+    color: var(--cinza);
+    font-size: 14px;
+    margin: 0;
+}
+
+
+
+.cadastro-box {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 850px;
+}
+
+.cadastro-box-titulo {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.cadastro-box-titulo h2 {
+    font-size: 20px;
+    margin: 0 0 6px;
+    color: var(--marinho);
+}
+
+.cadastro-box-titulo p {
+    color: var(--cinza);
+    font-size: 12px;
+    margin: 0;
+}
+
+
+
+.cadastro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.cadastro-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cadastro-campo label {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--marinho);
+}
+
+.cadastro-campo input,
+.cadastro-campo textarea {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #cfd7e0;
+    border-radius: 7px;
+    background: var(--branco);
+    color: var(--marinho);
+    font-size: 14px;
+}
+
+.cadastro-campo input {
+    height: 44px;
+}
+
+.cadastro-campo textarea {
+    resize: vertical;
+    min-height: 115px;
+}
+
+.cadastro-campo input::placeholder,
+.cadastro-campo textarea::placeholder {
+    color: #919ca7;
+}
+
+.cadastro-campo input:focus,
+.cadastro-campo textarea:focus {
+    outline: 2px solid var(--laranja);
+    outline-offset: 1px;
+}
+
+.cadastro-campo small {
+    color: var(--cinza);
+    font-size: 11px;
+}
+
+
+
+.cadastro-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--borda);
+}
+
+.cadastro-acoes .btn {
+    min-width: 120px;
+}
+
+
+@media (max-width: 600px) {
+
+    .cadastro-main {
+        padding-top: 25px;
+    }
+
+    .cadastro-topo h1 {
+        font-size: 26px;
+    }
+
+    .cadastro-box {
+        padding: 20px;
+    }
+
+    .cadastro-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .campo-completo {
+        grid-column: auto;
+    }
+
+    .cadastro-acoes {
+        flex-direction: column-reverse;
+    }
+
+    .cadastro-acoes .btn {
+        width: 100%;
+    }
+}

@@ -1,71 +1,217 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastrar Restaurante - RanGo</title>
+    <title>Cadastrar restaurante | RanGo</title>
+
+    <link rel="stylesheet"
+          href="/css/rango.css"
+          th:href="@{/css/rango.css}">
 </head>
 
 <body>
 
-    <h1>Cadastrar novo restaurante</h1>
+    <header class="site-header">
+        <div class="container header-content">
 
-    <form th:action="@{/restaurantes}"
-          th:object="${restaurante}"
-          method="post">
+            <a class="brand"
+               href="/restaurantes"
+               th:href="@{/restaurantes}">
 
-        <p>
-            <label for="nome">Nome:</label>
-            <input type="text"
-                   id="nome"
-                   th:field="*{nome}"
-                   required>
-        </p>
+                <img src="/img/logo%20RanGo.png" th:src="@{/img/logo%20RanGo.png}" alt="Logo do RanGo">
 
-        <p>
-            <label for="endereco">Endereço:</label>
-            <input type="text"
-                   id="endereco"
-                   th:field="*{endereco}"
-                   required>
-        </p>
+                <span>Ran<strong>Go</strong></span>
+            </a>
 
-        <p>
-            <label for="bairro">Bairro:</label>
-            <input type="text"
-                   id="bairro"
-                   th:field="*{bairro}"
-                   required>
-        </p>
+            <nav class="main-nav" aria-label="Menu principal">
 
-        <p>
-            <label for="categoria">Categoria:</label>
-            <input type="text"
-                   id="categoria"
-                   th:field="*{categoria}"
-                   required>
-        </p>
+                <a href="/restaurantes"
+                   th:href="@{/restaurantes}">
+                    Restaurantes
+                </a>
 
-        <p>
-            <label for="descricao">Descrição:</label>
-            <textarea id="descricao"
-                      th:field="*{descricao}"
-                      rows="4"></textarea>
-        </p>
+                <a class="register-link"
+                   href="/restaurantes/novo"
+                   th:href="@{/restaurantes/novo}"
+                   aria-current="page">
+                    Cadastrar restaurante
+                </a>
 
-        <button type="submit">Salvar restaurante</button>
+            </nav>
+        </div>
+    </header>
 
-    </form>
 
-    <p>
-        <a th:href="@{/restaurantes}">
-            Voltar para restaurantes
-        </a>
-    </p>
+    <main class="container cadastro-main">
+
+        <div class="cadastro-topo">
+
+            <a class="cadastro-voltar"
+               href="/restaurantes"
+               th:href="@{/restaurantes}">
+                ← Voltar para restaurantes
+            </a>
+
+            <p class="cadastro-label">
+                CATÁLOGO RANGO
+            </p>
+
+            <h1>Cadastrar restaurante</h1>
+
+            <p>
+                Preencha as informações abaixo para
+                adicionar um restaurante ao catálogo.
+            </p>
+
+        </div>
+
+
+        <section class="cadastro-box">
+
+            <div class="cadastro-box-titulo">
+                <h2>Informações do restaurante</h2>
+                <p>Os campos com * são obrigatórios.</p>
+            </div>
+
+            <form
+                action="/restaurantes"
+                th:action="@{/restaurantes}"
+                th:object="${restaurante}"
+                method="post">
+
+                <div class="cadastro-grid">
+
+
+                    <div class="cadastro-campo campo-completo">
+
+                        <label for="nome">
+                            Nome do restaurante *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            th:field="*{nome}"
+                            placeholder="Ex.: Sabor de Maceió"
+                            autocomplete="organization"
+                            required>
+
+                    </div>
+
+
+                    <div class="cadastro-campo">
+
+                        <label for="bairro">
+                            Bairro *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bairro"
+                            th:field="*{bairro}"
+                            placeholder="Ex.: Ponta Verde"
+                            required>
+
+                    </div>
+
+
+                    <div class="cadastro-campo">
+
+                        <label for="categoria">
+                            Tipo de comida *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="categoria"
+                            th:field="*{categoria}"
+                            list="tipos-comida"
+                            placeholder="Ex.: Regional"
+                            required>
+
+                        <datalist id="tipos-comida">
+                            <option value="Regional">
+                            <option value="Japonês">
+                            <option value="Hambúrguer">
+                            <option value="Massas">
+                            <option value="Pizza">
+                            <option value="Vegano">
+                        </datalist>
+
+                    </div>
+
+
+                    <div class="cadastro-campo campo-completo">
+
+                        <label for="endereco">
+                            Endereço *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="endereco"
+                            th:field="*{endereco}"
+                            placeholder="Rua, número e complemento"
+                            autocomplete="street-address"
+                            required>
+
+                    </div>
+
+
+                    <div class="cadastro-campo campo-completo">
+
+                        <label for="descricao">
+                            Descrição do restaurante
+                        </label>
+
+                        <textarea
+                            id="descricao"
+                            th:field="*{descricao}"
+                            rows="5"
+                            placeholder="Conte um pouco sobre o restaurante, sua culinária e seus diferenciais."></textarea>
+
+                        <small>
+                            Uma descrição simples ajuda o visitante
+                            a conhecer melhor o estabelecimento.
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <!-- Botões -->
+                <div class="cadastro-acoes">
+
+                    <a class="btn btn-secondary"
+                       href="/restaurantes"
+                       th:href="@{/restaurantes}">
+                        Cancelar
+                    </a>
+
+                    <button class="btn btn-primary"
+                            type="submit">
+                        Salvar restaurante
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="container">
+            RanGo · Projeto acadêmico de busca
+            de restaurantes em Maceió
+        </div>
+    </footer>
 
 </body>
 </html>
