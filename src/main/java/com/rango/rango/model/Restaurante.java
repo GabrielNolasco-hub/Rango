@@ -21,6 +21,7 @@ public class Restaurante {
     private String bairro;
     private String categoria;
     private String descricao;
+    private String contato;
     private LocalTime horarioAbertura;
     private LocalTime horarioFechamento;
 
@@ -98,7 +99,15 @@ public class Restaurante {
         if (horarioAbertura.isBefore(horarioFechamento)) {
             return !agora.isBefore(horarioAbertura) && agora.isBefore(horarioFechamento);
         }
-        // fecha depois da meia-noite (ex.: abre 18:00 e fecha 02:00)
+        
         return !agora.isBefore(horarioAbertura) || agora.isBefore(horarioFechamento);
+    }
+
+    public String getContato() {
+    return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 }

@@ -140,6 +140,7 @@
                             <option value="Massas">
                             <option value="Pizza">
                             <option value="Vegano">
+                            <option value="Brasileira">
                         </datalist>
 
                     </div>
@@ -183,7 +184,7 @@
 
                 </div>
 
-                <!-- Botões -->
+                
                 <div class="cadastro-acoes">
 
                     <a class="btn btn-secondary"
@@ -191,6 +192,16 @@
                        th:href="@{/restaurantes}">
                         Cancelar
                     </a>
+
+
+                    <p>
+                        <label for="contato">Contato:</label>
+                        <input type="text"
+                            id="contato"
+                            th:field="*{contato}"
+                            placeholder="(82) 99999-9999 ou @instagram">
+                    </p>
+
 
                     <button class="btn btn-primary"
                             type="submit">

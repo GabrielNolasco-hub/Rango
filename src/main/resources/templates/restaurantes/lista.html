@@ -94,7 +94,7 @@
             </div>
         </section>
 
-        <!-- Atalhos para descobrir culinárias -->
+        
         <section class="container categories-section" id="categorias">
             <div class="section-heading">
                 <h2>Explore por tipo de comida</h2>
@@ -138,25 +138,57 @@
             </div>
 
             <div class="restaurant-list" id="restaurant-list">
-                <article class="restaurant-card"
-                         th:each="r : ${restaurantes}"
-                         th:attr="data-categoria=${r.categoria}">
-                    <div class="restaurant-icon" aria-hidden="true">🍽️</div>
+                            
+            <article class="restaurant-card"
+                    th:each="r : ${restaurantes}"
+                    th:attr="data-categoria=${r.categoria}">
 
-                    <div class="restaurant-info">
-                        <span class="category-tag" th:text="${r.categoria}">Categoria</span>
-                        <h3 th:text="${r.nome}">Nome do restaurante</h3>
-                        <p class="restaurant-description"
-                           th:if="${r.descricao != null and !#strings.isEmpty(r.descricao)}"
-                           th:text="${r.descricao}">Descrição do restaurante</p>
-                        <p class="restaurant-address">
-                            <span aria-hidden="true">📍</span>
-                            <span th:text="${r.bairro}">Bairro</span>
-                            <span class="address-separator">·</span>
-                            <span th:text="${r.endereco}">Endereço</span>
-                        </p>
-                    </div>
-                </article>
+                <div class="restaurant-icon" aria-hidden="true">
+                    🍽️
+                </div>
+
+                <div class="restaurant-info">
+
+                    <span class="category-tag"
+                        th:text="${r.categoria}">
+                        Categoria
+                    </span>
+
+                    <h3 th:text="${r.nome}">
+                        Nome do restaurante
+                    </h3>
+
+                    <p class="restaurant-description"
+                    th:if="${r.descricao != null and !#strings.isEmpty(r.descricao)}"
+                    th:text="${r.descricao}">
+                        Descrição do restaurante
+                    </p>
+
+                    <p class="restaurant-address">
+                        <span aria-hidden="true">📍</span>
+
+                        <span th:text="${r.bairro}">
+                            Bairro
+                        </span>
+
+                        <span class="address-separator">·</span>
+
+                        <span th:text="${r.endereco}">
+                            Endereço
+                        </span>
+                    </p>
+
+                </div>
+
+                <div class="restaurant-action">
+                    <a class="btn btn-primary"
+                    th:href="@{/restaurantes/{id}(id=${r.id})}">
+                        Ver detalhes
+                    </a>
+                </div>
+
+            </article>
+
             </div>
 
             <div class="empty-state" id="empty-results" hidden>
