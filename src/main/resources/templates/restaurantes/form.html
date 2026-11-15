@@ -15,6 +15,7 @@
 
 <body>
 
+    <!-- Cabeçalho -->
     <header class="site-header">
         <div class="container header-content">
 
@@ -22,13 +23,14 @@
                href="/restaurantes"
                th:href="@{/restaurantes}">
 
-                <img src="/img/logo%20RanGo.png" th:src="@{/img/logo%20RanGo.png}" alt="Logo do RanGo">
+                <img src="/img/logo%20RanGo.png"
+                     th:src="@{/img/logo%20RanGo.png}"
+                     alt="Logo do RanGo">
 
                 <span>Ran<strong>Go</strong></span>
             </a>
 
-            <nav class="main-nav" aria-label="Menu principal">
-
+            <nav class="main-nav">
                 <a href="/restaurantes"
                    th:href="@{/restaurantes}">
                     Restaurantes
@@ -36,16 +38,15 @@
 
                 <a class="register-link"
                    href="/restaurantes/novo"
-                   th:href="@{/restaurantes/novo}"
-                   aria-current="page">
+                   th:href="@{/restaurantes/novo}">
                     Cadastrar restaurante
                 </a>
-
             </nav>
+
         </div>
     </header>
 
-
+    <!-- Conteúdo principal -->
     <main class="container cadastro-main">
 
         <div class="cadastro-topo">
@@ -56,135 +57,146 @@
                 ← Voltar para restaurantes
             </a>
 
-            <p class="cadastro-label">
-                CATÁLOGO RANGO
-            </p>
+            <p class="cadastro-label">CATÁLOGO RANGO</p>
 
             <h1>Cadastrar restaurante</h1>
 
             <p>
-                Preencha as informações abaixo para
-                adicionar um restaurante ao catálogo.
+                Preencha as informações do estabelecimento
+                para adicioná-lo ao catálogo do RanGo.
             </p>
 
         </div>
 
-
+        <!-- Formulário -->
         <section class="cadastro-box">
 
             <div class="cadastro-box-titulo">
                 <h2>Informações do restaurante</h2>
-                <p>Os campos com * são obrigatórios.</p>
+                <p>Os campos marcados com * são obrigatórios.</p>
             </div>
 
-            <form
-                action="/restaurantes"
-                th:action="@{/restaurantes}"
-                th:object="${restaurante}"
-                method="post">
+            <form action="/restaurantes"
+                  th:action="@{/restaurantes}"
+                  th:object="${restaurante}"
+                  method="post">
 
                 <div class="cadastro-grid">
 
-
+                    <!-- Nome -->
                     <div class="cadastro-campo campo-completo">
+                        <label for="nome">Nome do restaurante *</label>
 
-                        <label for="nome">
-                            Nome do restaurante *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nome"
-                            th:field="*{nome}"
-                            placeholder="Ex.: Sabor de Maceió"
-                            autocomplete="organization"
-                            required>
-
+                        <input type="text"
+                               id="nome"
+                               th:field="*{nome}"
+                               placeholder="Ex.: Sabor de Maceió"
+                               required>
                     </div>
 
-
+                    <!-- Bairro -->
                     <div class="cadastro-campo">
+                        <label for="bairro">Bairro *</label>
 
-                        <label for="bairro">
-                            Bairro *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="bairro"
-                            th:field="*{bairro}"
-                            placeholder="Ex.: Ponta Verde"
-                            required>
-
+                        <input type="text"
+                               id="bairro"
+                               th:field="*{bairro}"
+                               placeholder="Ex.: Ponta Verde"
+                               required>
                     </div>
 
-
+                    <!-- Categoria -->
                     <div class="cadastro-campo">
+                        <label for="categoria">Tipo de comida *</label>
 
-                        <label for="categoria">
-                            Tipo de comida *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="categoria"
-                            th:field="*{categoria}"
-                            list="tipos-comida"
-                            placeholder="Ex.: Regional"
-                            required>
+                        <input type="text"
+                               id="categoria"
+                               th:field="*{categoria}"
+                               list="tipos-comida"
+                               placeholder="Ex.: Brasileira"
+                               required>
 
                         <datalist id="tipos-comida">
+                            <option value="Brasileira">
                             <option value="Regional">
-                            <option value="Japonês">
-                            <option value="Hambúrguer">
                             <option value="Massas">
+                            <option value="Hambúrguer">
+                            <option value="Japonês">
                             <option value="Pizza">
                             <option value="Vegano">
-                            <option value="Brasileira">
                         </datalist>
-
                     </div>
 
-
+                    <!-- Endereço -->
                     <div class="cadastro-campo campo-completo">
+                        <label for="endereco">Endereço *</label>
 
-                        <label for="endereco">
-                            Endereço *
+                        <input type="text"
+                               id="endereco"
+                               th:field="*{endereco}"
+                               placeholder="Rua, número e complemento"
+                               required>
+                    </div>
+
+                    <!-- Contato -->
+                    <div class="cadastro-campo campo-completo">
+                        <label for="contato">Contato do restaurante</label>
+
+                        <input type="tel"
+                               id="contato"
+                               th:field="*{contato}"
+                               placeholder="Ex.: (82) 99999-9999"
+                               autocomplete="tel">
+
+                        <small>
+                            Informe um telefone para contato.
+                        </small>
+                    </div>
+
+                    <!-- Horário de abertura -->
+                    <div class="cadastro-campo">
+                        <label for="horarioAbertura">
+                            Horário de abertura
                         </label>
 
-                        <input
-                            type="text"
-                            id="endereco"
-                            th:field="*{endereco}"
-                            placeholder="Rua, número e complemento"
-                            autocomplete="street-address"
-                            required>
-
+                        <input type="time"
+                               id="horarioAbertura"
+                               th:field="*{horarioAbertura}"
+                               step="60">
                     </div>
 
+                    <!-- Horário de fechamento -->
+                    <div class="cadastro-campo">
+                        <label for="horarioFechamento">
+                            Horário de fechamento
+                        </label>
 
+                        <input type="time"
+                               id="horarioFechamento"
+                               th:field="*{horarioFechamento}"
+                               step="60">
+                    </div>
+
+                    <!-- Descrição -->
                     <div class="cadastro-campo campo-completo">
-
                         <label for="descricao">
                             Descrição do restaurante
                         </label>
 
-                        <textarea
-                            id="descricao"
-                            th:field="*{descricao}"
-                            rows="5"
-                            placeholder="Conte um pouco sobre o restaurante, sua culinária e seus diferenciais."></textarea>
+                        <textarea id="descricao"
+                                  th:field="*{descricao}"
+                                  rows="5"
+                                  placeholder="Descreva a culinária, o ambiente e os diferenciais do restaurante."></textarea>
 
                         <small>
-                            Uma descrição simples ajuda o visitante
-                            a conhecer melhor o estabelecimento.
+                            Essa descrição aparecerá nas informações
+                            do restaurante.
                         </small>
-
                     </div>
 
                 </div>
 
-                
+                <!-- Ações -->
                 <div class="cadastro-acoes">
 
                     <a class="btn btn-secondary"
@@ -192,16 +204,6 @@
                        th:href="@{/restaurantes}">
                         Cancelar
                     </a>
-
-
-                    <p>
-                        <label for="contato">Contato:</label>
-                        <input type="text"
-                            id="contato"
-                            th:field="*{contato}"
-                            placeholder="(82) 99999-9999 ou @instagram">
-                    </p>
-
 
                     <button class="btn btn-primary"
                             type="submit">
@@ -211,11 +213,9 @@
                 </div>
 
             </form>
-
         </section>
 
     </main>
-
 
     <footer class="site-footer">
         <div class="container">
