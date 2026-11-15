@@ -9,6 +9,9 @@
     <link rel="stylesheet"
           href="/css/rango.css"
           th:href="@{/css/rango.css}">
+    <script src="/js/cadastro-pratos.js"
+        th:src="@{/js/cadastro-pratos.js}"
+        defer></script>
 </head>
 
 <body>
@@ -134,6 +137,96 @@
                 0 prato(s)
             </span>
         </div>
+
+        <details class="rd-add-dish">
+
+            <summary>
+                <span>+ Cadastrar prato</span>
+            </summary>
+
+            <div class="rd-add-dish-content">
+
+                <h3>Novo prato</h3>
+
+                <p>
+                    Preencha as informações para adicionar
+                    um prato ao cardápio deste restaurante.
+                </p>
+
+                <form id="form-cadastro-prato"
+                    th:attr="data-restaurante-id=${restaurante.id}">
+
+                    <div class="rd-dish-form-grid">
+
+                        <div class="rd-dish-field rd-field-full">
+
+                            <label for="nomePrato">
+                                Nome do prato *
+                            </label>
+
+                            <input type="text"
+                                id="nomePrato"
+                                name="nome"
+                                placeholder="Ex.: Filé à parmegiana"
+                                maxlength="100"
+                                required>
+
+                        </div>
+
+                        <div class="rd-dish-field rd-field-full">
+
+                            <label for="descricaoPrato">
+                                Descrição
+                            </label>
+
+                            <textarea id="descricaoPrato"
+                                    name="descricao"
+                                    rows="3"
+                                    maxlength="250"
+                                    placeholder="Descreva os ingredientes e acompanhamentos"></textarea>
+
+                        </div>
+
+                        <div class="rd-dish-field">
+
+                            <label for="precoPrato">
+                                Preço (R$) *
+                            </label>
+
+                            <input type="number"
+                                id="precoPrato"
+                                name="preco"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Ex.: 35,90"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="rd-dish-form-actions">
+
+                        <button type="submit"
+                                class="btn btn-primary"
+                                id="salvar-prato">
+
+                            Salvar prato
+
+                        </button>
+
+                    </div>
+
+                    <p id="mensagem-cadastro-prato"
+                    class="rd-dish-feedback"
+                    role="status"
+                    aria-live="polite"></p>
+
+                </form>
+
+            </div>
+
+        </details>       
 
         <div class="rd-dish-list" th:if="${!#lists.isEmpty(pratos)}">
 
