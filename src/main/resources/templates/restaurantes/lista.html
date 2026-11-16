@@ -7,7 +7,9 @@
     <title>Encontre restaurantes | RanGo</title>
 
     <link rel="stylesheet" href="/css/rango.css" th:href="@{/css/rango.css}">
-    <script src="/js/filtros.js" th:src="@{/js/filtros.js}" defer></script>
+    <script src="/js/filtros.js?v=2"
+        th:src="@{/js/filtros.js(v=2)}"
+        defer></script>
 </head>
 <body>
     
@@ -44,19 +46,35 @@
                 <h2 id="filters-title">O que você está procurando?</h2>
 
                 <form id="restaurant-filters" action="/restaurantes" th:action="@{/restaurantes}" method="get">
-                    <div class="filter-grid">
+                    <div class="filter-grid">                   
                         <div class="field">
                             <label for="categoria">Tipo de comida</label>
-                            <select id="categoria" name="categoria">
-                                <option value="">Todas as culinárias</option>
-                                <option value="massas">Massas</option>
-                                <option value="hamburguer">Hambúrguer</option>
-                                <option value="japones">Japonês</option>
-                                <option value="vegano">Vegano</option>
-                                <option value="regional">Regional</option>
-                                <option value="pizza">Pizza</option>
-                            </select>
+
+                            <input
+                                type="search"
+                                id="categoria"
+                                name="categoria"
+                                list="culinarias"
+                                placeholder="Ex.: Japonesa, Árabe, Pizza..."
+                                autocomplete="off">
+
+                            <datalist id="culinarias">
+                                <option value="Massas">
+                                <option value="Hambúrguer">
+                                <option value="Japonês">
+                                <option value="Vegano">
+                                <option value="Vegetariana">
+                                <option value="Brasileira">
+                                <option value="Regional">
+                                <option value="Pizza">
+                                <option value="Sobremesas">
+                            </datalist>
+
+                            <small>
+                                Escolha uma sugestão ou digite outra culinária.
+                            </small>
                         </div>
+
 
                         <div class="field">
                             <label for="bairro">Bairro ou região</label>
@@ -66,13 +84,29 @@
 
                         <div class="field">
                             <label for="preco">Faixa de preço</label>
-                            <select id="preco" name="preco" aria-describedby="price-help">
+                            <select id="preco" name="preco">
                                 <option value="">Qualquer preço</option>
                                 <option value="ate40">Até R$ 40</option>
                                 <option value="40a70">R$ 40 a R$ 70</option>
                                 <option value="70a100">R$ 70 a R$ 100</option>
                                 <option value="acima100">Acima de R$ 100</option>
+                                <option value="personalizado">Definir meu limite</option>
                             </select>
+
+                            <div id="campo-preco-personalizado" hidden>
+                                <label for="precoPersonalizado">
+                                    Preço máximo (R$)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="precoPersonalizado"
+                                    name="precoMaximo"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="Ex.: 55">
+                            </div>
+
                         </div>
 
                         <div class="field">
@@ -87,9 +121,6 @@
                         <a class="btn btn-secondary" href="/restaurantes" th:href="@{/restaurantes}">Limpar filtros</a>
                     </div>
 
-                    <p class="prototype-note" id="price-help">
-                        Protótipo: o filtro por preço será ativado quando a equipe incluir faixas de preço nos cadastros.
-                    </p>
                 </form>
             </div>
         </section>
@@ -121,7 +152,7 @@
                     <span aria-hidden="true">🍕</span> Pizza
                 </button>
                 <button type="button" class="category-choice" data-category="doces">
-                    <span aria-hidden="true">🍰</span> Sobremesas 
+                    <span aria-hidden="true">🍰</span> Doces e Sobremesas 
                 </button>
                 
             </div>
@@ -137,11 +168,13 @@
                 <span class="results-count" id="results-count" aria-live="polite">Resultados</span>
             </div>
 
+            <p class="price-warning" id="price-warning" hidden></p>
+
             <div class="restaurant-list" id="restaurant-list">
                             
             <article class="restaurant-card"
                     th:each="r : ${restaurantes}"
-                    th:attr="data-categoria=${r.categoria}">
+                    th:attr="data-categoria=${r.categoria},data-restaurante-id=${r.id}">
 
                 <div class="restaurant-icon" aria-hidden="true">
                     🍽️
@@ -197,9 +230,6 @@
                 <a href="/restaurantes" th:href="@{/restaurantes}" class="btn btn-secondary">Ver todos</a>
             </div>
 
-            <p class="price-warning" id="price-warning" hidden>
-                A faixa de preço selecionada ainda não foi aplicada: esse dado será incluído na próxima etapa do projeto.
-            </p>
         </section>
     </main>
 

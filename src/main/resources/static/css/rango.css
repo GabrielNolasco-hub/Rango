@@ -1096,3 +1096,26 @@ a:focus-visible {
     }
 
 }
+
+/* Esconder resultados que não correspondem aos filtros */
+
+.restaurant-card[hidden],
+.empty-state[hidden],
+.price-warning[hidden] {
+    display: none !important;
+}
+
+#campo-preco-personalizado {
+    margin-top: 12px;
+}
+
+#campo-preco-personalizado[hidden] {
+    display: none;
+}
+
+.field small {
+    display: block;
+    margin-top: 6px;
+    color: var(--cinza);
+    font-size: 11px;
+}
