@@ -1119,3 +1119,18 @@ a:focus-visible {
     color: var(--cinza);
     font-size: 11px;
 }
+
+.field label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    min-height: 22px;
+}
+
+.field label small {
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6b7280;
+}
