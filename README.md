@@ -1,6 +1,6 @@
 
 
-Projeto desenvolvido para a disciplina de Engenharia de Software (Afya / UNIMA).
+Projeto desenvolvido para a  de Engenharia de Software (Afya / UNIMA).
 
 ## 🚀 Tecnologias
 * Java 21
